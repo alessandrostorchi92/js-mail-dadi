@@ -1,26 +1,37 @@
-// L'utente invia la sua email una volta che clicca sulla call to action 
-
-const btnSubmit = document.querySelector(".btn_submit");
-
-btnSubmit.addEventListener("click", function () {
-
 // Dichiarazione delle variabili e dell'array
 
-const userEmaiIinput = document.querySelector("[name='useremail']").value;
-const emailList = ["mariorossi@gmail.com", "mattiabianchi@gmail.com", "rosamaria@gmail.com", "francescaverdi@gmail.com", "gianfranconeri@gmail.com", "saraceleste@gmail.com"];
+const emailListAllowed = ["mario.rossi@gmail.com", "mattia.bianchi@gmail.com", "rosa.maria@gmail.com", "francesca.verdi@gmail.com", "gianfranco.neri@gmail.com", "sara.celeste@gmail.com"];
+const userEmaiIinput = document.querySelector("[name='useremail']");
+const btnSubmit = document.querySelector(".btn_submit");
 
-// Controllare che l'email dell'utente sia all'interno dell'array 
+// L'utente invia la sua email una volta che clicca sulla call to action
 
-for (let i = 0; i < emailList.length; i++) {
+btnSubmit.addEventListener("click", function () {
+    const userEmail = userEmaiIinput.value;
+    let emailFound = false;
 
-const currentEmail = emailList[i]
+    // Controllare che l'email dell'utente sia nell'array 
 
-if (currentEmail === userEmaiIinput) {
-    console.log("Email dell'utente è all'interno della lista di chi può accedere");
-} else {
-    console.log("Accesso dell'utente negato");
-}
+    for (let i = 0; i < emailListAllowed.length; i++) {
 
-}
+        // Validazione Email inserita 
+
+        if (userEmail === emailListAllowed[i]) {
+            emailFound = true;
+        }
+    }
+
+    // Condizione email valida
+
+    if (emailFound === true) {
+        document.getElementById("valid_email").innerHTML = "L'email inserita è valida";
+    }
+
+    // Condizione email non valida
+
+    else {
+        document.getElementById("invalid_email").innerHTML = "L'email inserita non è valida";
+        document.getElementById("invalid_email").classList.add("alert_invalid");
+    }
 
 })
